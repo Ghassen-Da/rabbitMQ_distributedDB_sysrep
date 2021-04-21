@@ -1,23 +1,27 @@
 package branch_office;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 public class Send {
 
-	private final static String queueName = "boo";
+	private final static String queueName = "bao";
 	private ConnectionFactory factory;
 	private Channel channel;
+	private Connection connection;
 
-	public Send() throws IOException, TimeoutException {
+	public Send() {
 		factory = new ConnectionFactory();
 		factory.setHost("localhost");
-		try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel();) {
+		try {
+			this.connection = factory.newConnection();
+			this.channel = connection.createChannel();
 			channel.queueDeclare(queueName, false, false, false, null);
+			System.out.println(channel);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

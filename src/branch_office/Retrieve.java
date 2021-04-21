@@ -31,7 +31,7 @@ public class Retrieve {
 				article.setDescription(rs.getString(3));
 				article.setPrix(rs.getInt(4));
 				String jsonOutput = gson.toJson(article);
-				System.out.println(jsonOutput);
+				// System.out.println(jsonOutput);
 				sender.send(jsonOutput);
 			}
 		}

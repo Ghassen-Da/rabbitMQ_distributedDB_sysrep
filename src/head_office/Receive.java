@@ -10,7 +10,7 @@ import com.rabbitmq.client.DeliverCallback;
 
 public class Receive {
 
-	private final static String queueName = "boo";
+	private final static String queueName = "bao";
 	public static String jsonMessage;
 	private ConnectionFactory factory;
 	private Connection connection;
@@ -25,7 +25,7 @@ public class Receive {
 		System.out.println("[*] waiting for messages. To exit press CTRL+C");
 	}
 
-	public static String receive() throws Exception {
+	public String receive() throws Exception {
         DeliverCallback deliverCallBack = (consumerTag,delivery)->{
             String message = new String (delivery.getBody(),"UTF-8");
             System.out.println(" [x] recieved '"+message+"'");

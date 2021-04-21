@@ -21,17 +21,17 @@ public class Insert {
 		String user = "root";
 		String password = "";
 		String sql = "INSERT INTO articles(id, nom, description, prix) VALUES(?,?,?,?)";
+		Receive receiver = new Receive();
 try (Connection con = DriverManager.getConnection(cs, user, password);
 				PreparedStatement pst = con.prepareStatement(sql)) {
-			for (int i = 1; i <= 5; i++) {
-				receivedMessage = Receive.receive();
+			for (int i = 1; i <= 50; i++) {
+				receivedMessage = receiver.receive();
 				article = gson.fromJson(receivedMessage, Article.class);
-				System.out.println(article);
-				// pst.setInt(1, i);
-				// pst.setString(2, "nom " + i);
-				// pst.setString(3, "description " + i);
-				// pst.setInt(4, i * 2);
-				// pst.executeUpdate();
+				pst.setInt(1, i);
+				pst.setString(2, "nom " + i);
+				pst.setString(3, "description " + i);
+				pst.setInt(4, i * 2);
+				pst.executeUpdate();
 }
 } catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(Insert.class.getName());
